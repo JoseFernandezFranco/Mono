@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hazlo Más Mono</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        /* Contenedor del video */
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            display: none; /* Ocultar el video hasta que llegue al contador 25 */
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            margin-top: 20%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff6600;
+        }
+
+        #counter {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body id="background">
+
+<!-- Contenedor para el video de fondo -->
+<div class="video-container" id="videoContainer">
+    <video id="backgroundVideo" autoplay muted loop playsinline>
+        <source src="video1.mp4" type="video/mp4">
+        Tu navegador no soporta videos HTML5.
+    </video>
+</div>
+
+<!-- Contenedor para el botón y contador -->
+<div class="container">
+    <h1>¡Hazlo más mono!</h1>
+    <button onclick="makeMoreMonkey()">Hacer más mono</button>
+    <div id="counter">Mono nivel: 0</div>
+</div>
+
+<script>
+    let monkeyLevel = 0;
+
+    // Rutas de las imágenes
+    const initialImage = 'image1.png';
+    const monkeyImage = 'image2.png';
+
+    function makeMoreMonkey() {
+        monkeyLevel++;
+
+        if (monkeyLevel >= 25) {
+            // Muestra el video cuando el contador llegue a 25
+            document.getElementById('videoContainer').style.display = 'block';
+            document.getElementById('backgroundVideo').play(); // Reproduce el video
+        } else if (monkeyLevel >= 10) {
+            // Cambia a la imagen de mono cuando el contador llegue a 10
+            document.getElementById('background').style.backgroundImage = `url('${monkeyImage}')`;
+        } else {
+            // Imagen inicial
+            document.getElementById('background').style.backgroundImage = `url('${initialImage}')`;
+        }
+
+        // Actualiza el contador
+        document.getElementById('counter').innerText = `Mono nivel: ${monkeyLevel}`;
+    }
+
+    // Inicializa la primera imagen
+    document.getElementById('background').style.backgroundImage = `url('${initialImage}')`;
+</script>
+
+</body>
+</html>
